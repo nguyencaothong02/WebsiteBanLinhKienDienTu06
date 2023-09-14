@@ -1,0 +1,115 @@
+﻿@model WebsiteBanLinhKienDienTu06.Context.Rating
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-input {
+        position: relative;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .text-danger {
+        color: red;
+        font-size: 12px;
+    }
+
+    .checkbox {
+        display: flex;
+        align-items: center;
+    }
+
+
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+    }
+
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            opacity: 0.8;
+        }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-container">
+        <h4 class="text-center">Muốn đổi ý rồi hả?</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductID)
+
+        @Html.HiddenFor(model => model.CustomerID)
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Score, htmlAttributes: new { @class = "control-label col-md-3 col-form-label" })
+            <div class="col-md-9">
+                @Html.DropDownListFor(model => model.Score, new SelectList(new List<int> { 1, 2, 3, 4, 5 }), "-- Select Score --", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Score, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-3 col-form-label" })
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.HiddenFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-3 col-form-label" })
+            <div class="col-md-9">
+                @Html.HiddenFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="mt-3 text-center">
+                <input type="submit" value="Save" class="btn btn-outline-primary" />
+                @Html.ActionLink("Back to List", "ProductRating", new { id = Model.ProductID }, new { @class = "btn btn-light" })
+            </div>
+        </div>
+    </div>
+}
+

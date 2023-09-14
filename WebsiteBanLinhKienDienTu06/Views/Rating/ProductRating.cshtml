@@ -1,0 +1,107 @@
+﻿@model IEnumerable<WebsiteBanLinhKienDienTu06.Context.Rating>
+
+@{
+    ViewBag.Title = "ProductRating";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+
+
+
+
+
+<div style="margin-left: 50px">
+    
+    <p>
+        @if (Session["idCustomer"] != null)
+        {
+            if (ViewBag.HasPurchased)
+            {
+                <br />
+                @*@Html.ActionLink("Thêm bình luận", "Create", new { id = ViewBag.ProductID })*@
+                <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Create", new { id = ViewBag.ProductID })'">Create New</button>
+                
+
+            }
+            else
+            {
+                <span>Bạn cần mua sản phẩm này để tạo đánh giá.</span>
+            }
+
+            @*@Html.ActionLink("Thêm bình luận", "Create", new { id = ViewBag.ProductID })*@
+        }
+        else
+        {
+            <a href="~/Home/Login"> <span>Bạn cần đăng nhập để tạo đánh giá.</span></a>
+
+        }
+        @*@Html.ActionLink("Create New", "Create")*@
+    </p>
+</div>
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Customer.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Score)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+
+                    <td>
+                        @if (Session["idCustomer"] != null)
+                        {
+                            if (item.CustomerID == Session["idCustomer"].ToString())
+                            {
+                                @*@Html.ActionLink("Edit", "Edit", new { id = item.ProductID })*@
+                                <button class="btn btn-outline-primary " onclick="location.href='@Url.Action("Edit", new { id = item.ProductID })'">Edit</button>
+                                @*@Html.ActionLink("Delete", "Delete", new { id = item.ProductID })*@
+                                <button class="btn btn-outline-primary " onclick="location.href='@Url.Action("Delete", new { id = item.ProductID })'">Delete</button>
+                            }
+                        }
+
+                        @if (Session["idEmployee"] != null)
+                        {
+                            @*@Html.ActionLink("Delete", "DeleteAdmin", new { id = item.CustomerID })*@
+                            <button class="btn btn-outline-primary " onclick="location.href='@Url.Action("DeleteAdmin", new { id = item.CustomerID })'">Delete</button>
+
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

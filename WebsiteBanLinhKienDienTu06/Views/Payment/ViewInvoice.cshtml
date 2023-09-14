@@ -1,0 +1,63 @@
+﻿@model WebsiteBanLinhKienDienTu06.Models.InvoiceModel
+
+
+<style>
+    .invoice-container {
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+        .invoice-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .invoice-container p {
+            margin-bottom: 10px;
+        }
+</style>
+
+<script>
+    $(function () {
+        $(".paymentButton").click(function () {
+            // Xóa sản phẩm trước khi chuyển tới trang thanh toán
+            var model = {};
+            model.Id = $("#productid").val();
+            $.ajax({
+                type: "POST",
+                url: '/Cart/RemoveAll',
+                data: JSON.stringify(model),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('#CartCount').text(response.cartCount);
+                    // Chuyển tới trang thanh toán
+                    window.location.href = '/Home/Index';
+                },
+                error: function () {
+                    alert("Lỗi trong khi xóa khỏi giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+<div class="invoice-container">
+    <h2>Hóa đơn</h2>
+
+    <p><strong>Order ID:</strong> @Model.OrderID</p>
+    <p><strong>Customer ID:</strong> @Model.CustomerID</p>
+    <p><strong>Order Date:</strong> @Model.OrderDate</p>
+    <p><strong>Shipping Address:</strong> @Model.ShippingAddress</p>
+    <p><strong>Contact Name:</strong> @Model.ContactName</p>
+    <p><strong>Contact Phone:</strong> @Model.ContactPhone</p>
+    <p><strong>Total Price:</strong> @Model.TotalPrice</p>
+</div>
+<div style="text-align: center">
+    <a href="https://localhost:44359/" class="btn btn-light paymentButton"> Tiếp tục mua hàng </a>
+</div>

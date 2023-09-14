@@ -1,0 +1,107 @@
+﻿@model WebsiteBanLinhKienDienTu06.Context.Order
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card" style="width: 50%; margin: 0 auto;">
+            <div class="card-body">
+                <h4 class="card-subtitle text-center">Bạn có chắc xóa không?</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.CustomerID)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.CustomerID)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.EmployeeID)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.EmployeeID)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.OrderDate)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.RequireDate)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.RequireDate)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.ShippedDate)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ShippedDate)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.ShipVia)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ShipVia)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Freight)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Freight)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.ShippingAddress)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ShippingAddress)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.ContactName)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ContactName)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.ContactPhone)
+                    </dt>
+
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ContactPhone)
+                    </dd>
+                </dl>
+            </div>
+            <div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="card-footer text-center">
+                        <input type="submit" value="Delete" class="btn btn-outline-primary" />
+                        <a href="@Url.Action("Index")" class="btn btn-light">Back to List</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

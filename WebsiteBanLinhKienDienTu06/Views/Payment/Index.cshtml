@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .thank-image {
+        width: 350px;
+        height: auto;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .continue-button {
+        /* Chỉnh sửa thuộc tính display thành inline-block */
+        display: inline-block;
+        margin: 0 10px; /* Thêm khoảng cách giữa các button */
+        padding: 10px 20px;
+        background-color: pink;
+        color: white;
+        border: none;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .continue-button:hover {
+            background-color: red;
+        }
+    /* Thay đổi màu nền của button "Xem hóa đơn" thành màu xanh dương */
+    .view-invoice-button {
+        display: inline-block;
+        margin: 0 10px; /* Thêm khoảng cách giữa các button */
+        padding: 10px 20px;
+        background-color: grey;
+        /* Chỉnh màu chữ cho button "Xem hóa đơn" */
+        color: white;
+        border: none;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .view-invoice-button:hover {
+            /* Chỉnh màu nền khi di chuột qua button "Xem hóa đơn" */
+            background-color: lightblue;
+            /* Chỉnh màu chữ khi di chuột qua button "Xem hóa đơn" */
+            color: black;
+        }
+</style>
+<script>
+    $(function () {
+        $(".paymentButton").click(function () {
+            // Xóa sản phẩm trước khi chuyển tới trang thanh toán
+            var model = {};
+            model.Id = $("#productid").val();
+            $.ajax({
+                type: "POST",
+                url: '/Cart/RemoveAll',
+                data: JSON.stringify(model),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('#CartCount').text(response.cartCount);
+                    // Chuyển tới trang thanh toán
+                    window.location.href = '/Home/Index';
+                },
+                error: function () {
+                    alert("Lỗi trong khi xóa khỏi giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+
+<h2 class="text-center" , style="margin-top: 15px">Thanh toán thành công</h2>
+
+<!-- Sử dụng một div container để chứa các button -->
+<div style="text-align: center;">
+    <button class="continue-button paymentButton" onclick="location.href='@Url.Action("Index", "Home")'">Tiếp tục mua hàng</button>
+    <button class="view-invoice-button" onclick="location.href='@Url.Action("ViewInvoice", "Payment")'">Xem hóa đơn</button>
+</div>
+
+<img src="~/Content/images/myimage/thanks.png" alt="thanks" class="thank-image">

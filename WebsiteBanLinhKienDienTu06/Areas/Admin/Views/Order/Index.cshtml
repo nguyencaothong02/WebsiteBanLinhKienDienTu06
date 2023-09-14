@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WebsiteBanLinhKienDienTu06.Context.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <div style="margin-left: 50px">
+        <br/>
+        <p>
+            <button class="btn btn-outline-primary" onclick="location.href='@Url.Action("Create")'">Create New</button>
+        </p>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RequireDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ShippedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ShipVia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Freight)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ShippingAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ContactName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ContactPhone)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RequireDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShippedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShipVia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Freight)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShippingAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactPhone)
+                        </td>
+
+                        <td>
+                            <button class="btn btn-outline-primary btn-block" onclick="location.href='@Url.Action("Edit", new { id = item.OrderID })'">Edit</button>
+                            <button class="btn btn-outline-primary btn-block" onclick="location.href='@Url.Action("Details", new { id = item.OrderID })'">Details</button>
+                            <button class="btn btn-outline-primary btn-block" onclick="location.href='@Url.Action("Delete", new { id = item.OrderID })'">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

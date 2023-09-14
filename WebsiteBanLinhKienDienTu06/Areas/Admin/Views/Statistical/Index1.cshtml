@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Index1";
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Thống kê</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Thống kê</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Thống kê theo tháng</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart">
+                    <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                Footer
+            </div>
+            <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
+
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~Content/Admin/plugins/chart.js/Chart.min.js"></script>
+    <script src="~/Content/Admin/plugins/moment/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+    <script>
+        // Thống kê theo tháng
+        $(function () {
+            var arrDoanhThu = [];
+            var arrDate = [];
+            $.ajax({
+                url: '/Statistical/GetStatisticalMonth',
+                type: 'GET',
+                data: {},
+                success: function (rs) {
+                    $.each(rs.Data, function (i, item) {
+                        var strDate = moment(item.Month, "MM/YYYY").format('MM/YYYY');
+                        arrDate.push(strDate);
+                        arrDoanhThu.push(item.TotalSell);
+                    });
+
+                    var barChartCanvas = $('#barChart').get(0).getContext('2d');
+                    var barChartData = {
+                        labels: arrDate,
+                        datasets: [
+                            {
+                                label: 'Doanh thu',
+                                backgroundColor: 'rgba(60,141,188,0.9)',
+                                borderColor: 'rgba(60,141,188,0.8)',
+                                borderWidth: 1,
+                                data: arrDoanhThu
+                            },
+                            {
+                                label: 'Lợi nhuận',
+                                backgroundColor: 'rgba(210, 214, 222, 1)',
+                                borderColor: 'rgba(210, 214, 222, 1)',
+                                borderWidth: 1,
+                                data: [65, 59, 80, 81, 56, 55, 40]
+                            }
+                        ]
+                    };
+
+                    var barChartOptions = {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    };
+
+                    new Chart(barChartCanvas, {
+                        type: 'bar',
+                        data: barChartData,
+                        options: barChartOptions
+                    });
+                }
+            });
+        });
+    </script>
+
+</div>
+
+
+
+

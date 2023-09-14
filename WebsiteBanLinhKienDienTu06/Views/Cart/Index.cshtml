@@ -1,0 +1,198 @@
+﻿@model IEnumerable<WebsiteBanLinhKienDienTu06.Models.CartModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#removecart").click(function () {
+            var model = {};
+            // Lấy id sản phẩm
+            model.Id = $("#productid").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Remove", "Cart")',
+                data: JSON.stringify(model),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    $('#CartCount').text(response.cartCount);
+                    $("#product-" + model.Id).remove();
+                    location.reload();
+                },
+                error: function () {
+                    alert("Lỗi trong khi xóa khỏi giỏ hàng!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+
+
+<style>
+    .qborder {
+        border: 2px solid #311b1b;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        border-radius: 8px;
+    }
+</style>
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-9">
+                <div class="card">
+
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">Product</th>
+                                <th scope="col" width="120">Quantity</th>
+                                <th scope="col" width="120">Price</th>
+                                <th scope="col" class="text-right" width="200"> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                decimal? totalPrice = 0; // Khởi tạo biến totalPrice để tính tổng tiền
+                                string formattedTotal = "";
+
+                                foreach (var item in Model)
+                                {
+                                    decimal? price = @item.Product.Price;
+                                    var total = price * @item.Quantity;
+                                    totalPrice += total; // Cộng dồn tổng tiền từng sản phẩm vào totalPrice
+                                    string formattedPrice = String.Format("{0:#,##0} ₫", price);
+                                    formattedTotal = String.Format("{0:#,##0} ₫", totalPrice);
+                                    <tr id="product-@item.Product.ProductID">
+                                        <td>
+                                            <figure class="itemside">
+                                                <div class="aside"><img src="~/Content/images/myimage/@item.Product.ImageUrl" class="img-sm"></div>
+                                                <figcaption class="info">
+                                                    <a href="#" class="title text-dark">@item.Product.ProductName</a>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td>
+                                            <input class="qborder" type="text" value="@item.Quantity" />
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="price"> @formattedPrice</var>
+                                            </div> <!-- price-wrap .// -->
+                                        </td>
+                                        <td class="text-right">
+                                            <input type="hidden" value="@item.Product.ProductID" id="productid" />
+                                            <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
+
+                                            <a href="" class="btn btn-light " id="removecart"> Remove</a>
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <p>Không có sản phẩm trong giỏ hàng</p>
+                            }
+
+
+                        </tbody>
+
+                    </table>
+
+                    @if (!ViewBag.IsEmptyCart)
+                    {
+                        <div class="card-body border-top">
+                            <a href="@Url.Action(null, "Payment")" class="btn btn-outline-primary float-md-right"> Thanh toán <i class="fa fa-chevron-right"></i> </a>
+
+                            @*<a href="https://localhost:44359/" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Tiếp tục mua hàng </a>*@
+                        </div>
+
+
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">Giỏ hàng trống</div>
+                    }
+                    <div class="card-body border-top">
+                        <a href="https://localhost:44359/" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Tiếp tục mua hàng </a>
+                    </div>
+
+
+
+                </div> <!-- card.// -->
+
+
+                <div class="alert alert-success mt-3">
+                    <p class="icontext"><i class="icon text-success fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+                </div>
+
+            </main> <!-- col.// -->
+            <aside class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Mã giảm giá WHERE?</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="" placeholder="Mã giảm giá">
+                                    <span class="input-group-append">
+                                        <button class="btn btn-outline-primary">Apply</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div> <!-- card-body.// -->
+                </div>  <!-- card .// -->
+                <div class="card">
+                    <div class="card-body">
+                        @if (Model != null)
+                        {
+                            decimal? totalPrice = 0; // Khởi tạo biến totalPrice để tính tổng tiền
+                            string formattedTotal = "";
+                            foreach (var item in Model)
+                            {
+                                decimal? price = @item.Product.Price;
+                                var total = price * @item.Quantity;
+                                totalPrice += total; // Cộng dồn tổng tiền từng sản phẩm vào totalPrice
+                                string formattedPrice = String.Format("{0:#,##0} ₫", price);
+                                formattedTotal = String.Format("{0:#,##0} ₫", totalPrice);
+
+                            }
+                            <dl class="dlist-align">
+                                <dt> Tổng giá:</dt>
+                                <dd class="text-right">@formattedTotal</dd>
+                            </dl>
+                            <dl class="dlist-align">
+                                <dt>Giảm giá:</dt>
+                                <dd class="text-right">0 ₫</dd>
+                            </dl>
+                            <dl class="dlist-align">
+                                <dt>Thành tiền:</dt>
+                                <dd class="text-right  h5"><strong>@formattedTotal</strong></dd>
+                            </dl>
+                        }
+
+
+
+
+                    </div> <!-- card-body.// -->
+                </div>  <!-- card .// -->
+            </aside> <!-- col.// -->
+        </div>
+
+    </div> <!-- container .//  -->
+</section>

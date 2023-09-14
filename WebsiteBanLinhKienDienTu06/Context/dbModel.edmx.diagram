@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2641b00600674725aa7f9eea6ae5b9d7" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLyLinhKienDienTuModel.Category" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyLinhKienDienTuModel.Customer" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyLinhKienDienTuModel.Employee" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyLinhKienDienTuModel.OrderDetail" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyLinhKienDienTuModel.Order" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyLinhKienDienTuModel.Product" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyLinhKienDienTuModel.Rating" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyLinhKienDienTuModel.Supplier" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="QuanLyLinhKienDienTuModel.fk_Products_Categories_CategoryID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyLinhKienDienTuModel.fk_Orders_Customer_CustomerID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyLinhKienDienTuModel.fk_Ratings_Customers_CustomerID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyLinhKienDienTuModel.fk_Orders_Employee_EmployeeID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyLinhKienDienTuModel.fk_OrderDetails_Orders_OrderID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyLinhKienDienTuModel.fk_OrderDetails_Products_ProductID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyLinhKienDienTuModel.fk_Products_Suppliers_SupplierID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyLinhKienDienTuModel.fk_Ratings_Products_ProductID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

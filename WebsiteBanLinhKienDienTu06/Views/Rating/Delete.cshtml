@@ -1,0 +1,67 @@
+﻿@model WebsiteBanLinhKienDienTu06.Context.Rating
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="card" style="width: 50%; margin: 0 auto;">
+        <div class="card-body">
+            <h4 class="card-subtitle text-center">Suy nghĩ kỹ nha!!!</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Customer.Username)
+                </dt>
+
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Customer.Username)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Product.ProductName)
+                </dt>
+
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Product.ProductName)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Score)
+                </dt>
+
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Score)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Comment)
+                </dt>
+
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Comment)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </dt>
+
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.CreatedDate)
+                </dd>
+
+            </dl>
+        </div>
+        <div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="card-footer text-center">
+                    <input type="submit" value="Delete" class="btn btn-outline-primary" />
+                    <a href="@Url.Action("ProductRating", new { id = Model.ProductID })" class="btn btn-light">Back to List</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

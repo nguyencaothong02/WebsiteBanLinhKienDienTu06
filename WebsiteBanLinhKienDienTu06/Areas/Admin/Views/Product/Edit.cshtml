@@ -1,0 +1,171 @@
+﻿
+@model WebsiteBanLinhKienDienTu06.Context.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+
+
+<style>
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: bold;
+    }
+
+    .form-input {
+        position: relative;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .text-danger {
+        color: red;
+        font-size: 12px;
+    }
+
+    .checkbox {
+        display: flex;
+        align-items: center;
+    }
+
+    
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+    }
+
+        .btn-primary:hover,
+        .btn-secondary:hover {
+            opacity: 0.8;
+        }
+</style>
+
+
+<div class="content-wrapper">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-container">
+            <h4 class="text-center">Sửa thông tin sản phẩm</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ProductID)
+
+            <div class="form-group">
+                <label class="form-label" for="ProductName">Product Name</label>
+                <div class="form-input">
+                    @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CategoryID, "CategoryName", htmlAttributes: new { @class = "form-label" })
+                <div class="form-input">
+                    @*@Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.DropDownList("LSP")
+                    @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SupplierID, "CompanyName", htmlAttributes: new { @class = "form-label" })
+                <div class="form-input">
+                    @*@Html.DropDownList("SupplierID", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.DropDownList("NCC")
+                    @Html.ValidationMessageFor(model => model.SupplierID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="Price">Price</label>
+                <div class="form-input">
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="Quantity">Quantity</label>
+                <div class="form-input">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="Description">Description</label>
+                <div class="form-input">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @id = "Description" })
+                    <script type="text/javascript" lang="javascript">
+                        CKEDITOR.replace("Description")
+                    </script>
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="ImageUrl">Image URL</label>
+                <div class="form-input">
+                    @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="Discoutinued">Discontinued</label>
+                <div class="form-input">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Discoutinued)
+                        @Html.ValidationMessageFor(model => model.Discoutinued, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*<div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-outline-primary" />
+                </div>*@
+                <div class="mt-3 text-center">
+                    <input type="submit" value="Save" class="btn btn-outline-primary" />
+                    @*<button class="btn btn-light" onclick="location.href='@Url.Action("Index", "Customer")'">Back to List</button>*@
+                    @Html.ActionLink("Back to List", "Index", "Product", null, new { @class = "btn btn-light" })
+                </div>
+            </div>
+
+        </div>
+    }
+</div>

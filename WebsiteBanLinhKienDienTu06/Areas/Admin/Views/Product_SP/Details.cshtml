@@ -1,0 +1,85 @@
+﻿@model WebsiteBanLinhKienDienTu06.Context.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="card" style="width: 50%; margin: 0 auto;">
+            @*<div class="card-header">
+                    <h2 class="card-title">Details</h2>
+                </div>*@
+            <div class="card-body">
+                <h4 class="card-subtitle text-center">Thông tin sản phẩm</h4>
+                <hr />
+
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ProductName)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Price)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Price)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Quantity)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.ImageUrl)
+                    </dt>
+                    <dd class="col-sm-8">
+                        <img src="~/Content/images/myimage/@Model.ImageUrl" width="200" height="150" />
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Discoutinued)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Discoutinued)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Category.CategoryName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Category.CategoryName)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Supplier.CompanyName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Supplier.CompanyName)
+                    </dd>
+                </dl>
+            </div>
+            <div class="card-footer text-center">
+                <a href="@Url.Action("Edit", new { id = Model.ProductID })" class="btn btn-outline-primary">Edit</a>
+                <a href="@Url.Action("Index")" class="btn btn-light">Back to List</a>
+            </div>
+        </div>
+    </div>
+
+</div>
